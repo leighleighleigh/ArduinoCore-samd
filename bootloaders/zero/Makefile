@@ -62,6 +62,7 @@ NAME?=samd21_sam_ba
 
 # -----------------------------------------------------------------------------
 # Compiler options
+SAM_BA_USBCDC_ONLY=1
 SAM_BA_INTERFACES?=SAM_BA_USBCDC_ONLY
 CFLAGS_EXTRA=-D__SAMD21G16A__ -DBOARD_ID_$(BOARD_ID) -D$(SAM_BA_INTERFACES)
 CFLAGS=-mthumb -mcpu=cortex-m0plus -Wall -c -std=gnu99 -ffunction-sections -fdata-sections -nostdlib -nostartfiles --param max-inline-insns-single=500
