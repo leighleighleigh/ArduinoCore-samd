@@ -23,15 +23,16 @@
 #include "board_definitions.h"
 
 #define SAM_BA_VERSION              "2.0"
+#define SAM_BA_USBCDC_ONLY
 
 #if !defined(SAM_BA_BOTH_INTERFACES) &&  !defined(SAM_BA_UART_ONLY) && !defined(SAM_BA_USBCDC_ONLY)
 #define SAM_BA_BOTH_INTERFACES
 #endif
 
 /* Selects USB as the communication interface of the monitor */
-#define SAM_BA_INTERFACE_USBCDC     0
+#define SAM_BA_INTERFACE_USBCDC     1
 /* Selects USART as the communication interface of the monitor */
-#define SAM_BA_INTERFACE_USART      1
+#define SAM_BA_INTERFACE_USART      0
 
 /* Selects USB as the communication interface of the monitor */
 #define SIZEBUFMAX                  64

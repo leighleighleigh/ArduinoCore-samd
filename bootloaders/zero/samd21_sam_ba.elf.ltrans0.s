@@ -1360,27 +1360,66 @@ main:
 	@ Volatile: function does not return.
 	@ args = 0, pretend = 0, frame = 56
 	@ frame_needed = 1, uses_anonymous_args = 0
+	movs	r2, #2
 	push	{r4, r5, r6, r7, lr}
-	ldr	r2, .L326
+	ldr	r4, .L337
 	sub	sp, sp, #60
-	ldr	r3, [r2]
+	ldr	r3, [r4, #52]
 	add	r7, sp, #0
+	bics	r3, r2
+	str	r3, [r4, #52]
+.L194:
+	ldr	r3, [r4, #12]
+	lsls	r3, r3, #20
+	bpl	.L194
+	ldr	r3, .L337+4
+	str	r3, [r4, #52]
+	movs	r3, #2
+	ldr	r2, [r4, #52]
+	orrs	r3, r2
+	str	r3, [r4, #52]
+.L195:
+	ldr	r3, [r4, #12]
+	lsls	r3, r3, #22
+	bpl	.L195
+.L196:
+	ldr	r3, [r4, #12]
+	lsls	r3, r3, #21
+	bmi	.L196
+	movs	r2, #2
+	ldr	r3, [r4, #52]
+	bics	r3, r2
+	str	r3, [r4, #52]
+.L197:
+	ldr	r3, [r4, #12]
+	lsls	r3, r3, #20
+	bpl	.L197
+	movs	r3, #8
+	ldr	r2, [r4, #52]
+	orrs	r3, r2
+	str	r3, [r4, #52]
+	movs	r3, #2
+	ldr	r2, [r4, #52]
+	orrs	r3, r2
+	ldr	r2, .L337+8
+	str	r3, [r4, #52]
+	ldr	r3, [r2]
 	adds	r3, r3, #1
-	beq	.L195
-	ldr	r3, .L326+4
-	ldr	r1, .L326+8
+	beq	.L199
+	ldr	r3, .L337+12
+	ldr	r1, .L337+16
 	uxtb	r0, r2
 	str	r1, [r3, #56]
 	cmp	r0, #0
-	bne	.L195
-	ldr	r3, .L326+12
-	ldr	r1, .L326+16
+	bne	.L199
+	ldr	r3, .L337+20
+	ldr	r1, .L337+24
 	ldrb	r3, [r3]
 	lsls	r3, r3, #31
 	lsrs	r3, r3, #31
-	beq	.L197
+	beq	.L201
 	str	r0, [r1]
-.L198:
+.L202:
 	ldr	r3, [r2]
 	.syntax divided
 @ 190 "/home/leigh/.arduino15/packages/arduino/tools/CMSIS/4.5.0/CMSIS/Include/cmsis_gcc.h" 1
@@ -1392,7 +1431,7 @@ main:
 	movs	r3, #255
 	movs	r1, r2
 	bics	r1, r3
-	ldr	r3, .L326+20
+	ldr	r3, .L337+28
 	str	r1, [r3, #8]
 	ldr	r3, [r2, #4]
 	.syntax divided
@@ -1401,48 +1440,49 @@ main:
 @ 0 "" 2
 	.thumb
 	.syntax unified
-	b	.L195
-.L327:
+	b	.L199
+.L338:
 	.align	2
-.L326:
+.L337:
+	.word	1073743872
+	.word	3145732
 	.word	__sketch_vectors_ptr
 	.word	.LANCHOR0
 	.word	__sketch_vectors_ptr+4
 	.word	1073742904
 	.word	536879100
 	.word	-536810240
-.L197:
-	ldr	r4, [r1]
-	ldr	r0, .L328
-	cmp	r4, r0
-	beq	.LCB1586
-	b	.L199	@long jump
-.LCB1586:
+.L201:
+	ldr	r5, [r1]
+	ldr	r0, .L339
+	cmp	r5, r0
+	beq	.LCB1642
+	b	.L203	@long jump
+.LCB1642:
 	str	r3, [r1]
-.L195:
+.L199:
 	movs	r1, #30
 	movs	r6, #2
-	ldr	r2, .L328+4
-	ldr	r4, .L328+8
+	ldr	r2, .L339+4
 	ldr	r3, [r2, #4]
 	bics	r3, r1
 	orrs	r3, r6
 	str	r3, [r2, #4]
-	ldr	r3, .L328+12
+	ldr	r3, .L339+8
 	strh	r3, [r4, #20]
 	ldrh	r3, [r4, #20]
 	orrs	r3, r6
 	strh	r3, [r4, #20]
 	str	r2, [r7, #12]
-.L201:
+.L205:
 	ldr	r3, [r4, #12]
 	tst	r3, r6
-	beq	.L201
+	beq	.L205
 	movs	r3, #1
-	ldr	r5, .L328+16
+	ldr	r5, .L339+12
 	str	r3, [r5, #8]
 	bl	gclk_sync
-	ldr	r3, .L328+20
+	ldr	r3, .L339+16
 	str	r3, [r5, #4]
 	bl	gclk_sync
 	movs	r3, #130
@@ -1454,11 +1494,11 @@ main:
 	bics	r3, r2
 	strh	r3, [r4, #36]
 	bl	dfll_sync
-	ldr	r3, .L328+24
+	ldr	r3, .L339+20
 	str	r3, [r4, #44]
 	bl	dfll_sync
 	ldrh	r2, [r4, #36]
-	ldr	r3, .L328+28
+	ldr	r3, .L339+24
 	orrs	r3, r2
 	strh	r3, [r4, #36]
 	bl	dfll_sync
@@ -1468,24 +1508,24 @@ main:
 	strh	r6, [r4, #36]
 	movs	r1, r3
 	subs	r3, r3, #64
-.L202:
+.L206:
 	ldr	r2, [r4, #12]
 	tst	r2, r1
-	beq	.L202
+	beq	.L206
 	ldr	r2, [r4, #12]
 	tst	r2, r3
-	beq	.L202
+	beq	.L206
 	movs	r4, #0
 	bl	dfll_sync
 	str	r4, [r5, #8]
 	bl	gclk_sync
-	ldr	r3, .L328+32
+	ldr	r3, .L339+28
 	str	r3, [r5, #4]
 	bl	gclk_sync
 	movs	r1, #192
-	ldr	r3, .L328+36
-	ldr	r2, .L328+40
-	ldr	r0, .L328+44
+	ldr	r3, .L339+32
+	ldr	r2, .L339+36
+	ldr	r0, .L339+40
 	str	r2, [r3, #4]
 	ldr	r2, [r0, #32]
 	lsls	r1, r1, #24
@@ -1502,18 +1542,18 @@ main:
 @ 0 "" 2
 	.thumb
 	.syntax unified
-	ldr	r1, .L328+48
+	ldr	r1, .L339+44
 	movs	r6, #1
 	ldr	r4, [r1, #28]
 	adds	r2, r2, #25
 	orrs	r2, r4
 	str	r2, [r1, #28]
 	movs	r1, #15
-	ldr	r4, .L328+52
+	ldr	r4, .L339+48
 	ldrb	r2, [r4]
 	orrs	r2, r6
 	strb	r2, [r4]
-	ldr	r2, .L328+56
+	ldr	r2, .L339+52
 	ldrb	r4, [r2]
 	bics	r4, r1
 	strb	r4, [r2]
@@ -1521,7 +1561,7 @@ main:
 	ldrb	r1, [r2]
 	orrs	r4, r1
 	strb	r4, [r2]
-	ldr	r4, .L328+60
+	ldr	r4, .L339+56
 	ldrb	r1, [r4]
 	orrs	r1, r6
 	strb	r1, [r4]
@@ -1534,36 +1574,36 @@ main:
 	orrs	r1, r4
 	strb	r1, [r2]
 	movs	r4, r3
-	ldr	r2, .L328+64
-	ldr	r3, .L328+40
+	ldr	r2, .L339+60
+	ldr	r3, .L339+36
 	strh	r2, [r5, #2]
 	str	r0, [r7, #8]
 	str	r3, [r7]
-.L204:
+.L208:
 	ldrb	r3, [r5, #1]
 	sxtb	r3, r3
 	cmp	r3, #0
-	blt	.L204
+	blt	.L208
 	movs	r3, #1
-	ldr	r6, .L328+68
+	ldr	r6, .L339+64
 	ldrb	r2, [r6]
 	orrs	r3, r2
 	strb	r3, [r6]
-.L205:
+.L209:
 	ldrb	r3, [r6, #2]
 	lsls	r3, r3, #31
-	bmi	.L205
+	bmi	.L209
 	movs	r1, #31
-	ldr	r2, .L328+72
+	ldr	r2, .L339+68
 	ldr	r3, [r2]
 	lsrs	r3, r3, #13
 	ands	r3, r1
 	cmp	r3, r1
-	bne	.L206
+	bne	.L210
 	movs	r3, #5
-.L206:
+.L210:
 	ldrh	r0, [r6, #40]
-	ldr	r5, .L328+76
+	ldr	r5, .L339+72
 	ands	r3, r1
 	lsls	r3, r3, #6
 	ands	r0, r5
@@ -1573,9 +1613,9 @@ main:
 	lsrs	r3, r3, #18
 	ands	r3, r1
 	cmp	r3, #31
-	bne	.L207
+	bne	.L211
 	subs	r3, r3, #2
-.L207:
+.L211:
 	movs	r0, #31
 	ldrh	r1, [r6, #40]
 	ands	r3, r0
@@ -1588,20 +1628,20 @@ main:
 	ands	r3, r2
 	str	r2, [r7, #4]
 	cmp	r3, r2
-	bne	.L208
+	bne	.L212
 	movs	r3, #3
-.L208:
+.L212:
 	ldr	r1, [r7, #4]
 	ldrh	r2, [r6, #40]
 	ands	r3, r1
-	ldr	r1, .L328+80
+	ldr	r1, .L339+76
 	lsls	r3, r3, #12
 	ands	r2, r1
 	orrs	r3, r2
 	movs	r2, #127
 	strh	r3, [r6, #40]
 	ldrb	r3, [r6]
-	ldr	r0, .L328+84
+	ldr	r0, .L339+80
 	ands	r3, r2
 	strb	r3, [r6]
 	movs	r3, #4
@@ -1621,23 +1661,23 @@ main:
 	adds	r2, r2, #127
 	bl	memset
 	movs	r2, #0
-	ldr	r5, .L328+88
-	ldr	r3, .L328+92
+	ldr	r5, .L339+84
+	ldr	r3, .L339+88
 	str	r6, [r5, #32]
 	str	r3, [r5, #40]
 	movs	r3, #2
 	strh	r2, [r5, #36]
 	ldrb	r1, [r6]
-	ldr	r0, .L328+96
+	ldr	r0, .L339+92
 	orrs	r3, r1
 	movs	r1, #128
 	strb	r3, [r6]
-	ldr	r3, .L328+100
+	ldr	r3, .L339+96
 	lsls	r1, r1, #10
 	str	r1, [r3, #8]
 	movs	r1, #8
 	str	r1, [r0]
-	ldr	r0, .L328+104
+	ldr	r0, .L339+100
 	movs	r6, #1
 	str	r1, [r0]
 	movs	r1, #128
@@ -1660,19 +1700,19 @@ main:
 	str	r3, [r4]
 	movs	r4, r5
 	adds	r4, r4, #60
-.L210:
+.L214:
 	movs	r0, r5
 	ldr	r3, [r5, #40]
 	adds	r0, r0, #32
 	blx	r3
 	cmp	r0, #0
-	beq	.L209
+	beq	.L213
 	strb	r6, [r4]
-.L209:
+.L213:
 	ldrb	r3, [r4]
 	cmp	r3, #0
-	beq	.L210
-	ldr	r3, .L328+108
+	beq	.L214
+	ldr	r3, .L339+104
 	movs	r2, #16
 	adds	r3, r3, #24
 	str	r3, [r5, #20]
@@ -1680,7 +1720,7 @@ main:
 	adds	r2, r7, r2
 	adds	r1, r2, r3
 	movs	r2, r1
-	ldr	r3, .L328+108
+	ldr	r3, .L339+104
 	adds	r3, r3, #52
 	ldmia	r3!, {r0, r4, r6}
 	stmia	r2!, {r0, r4, r6}
@@ -1713,61 +1753,61 @@ main:
 	movs	r2, #122
 	adds	r3, r3, #68
 	strb	r2, [r3]
-.L269:
+.L273:
 	ldr	r3, [r5, #20]
 	movs	r1, #64
 	ldr	r3, [r3, #16]
-	ldr	r0, .L328+112
+	ldr	r0, .L339+108
 	blx	r3
 	cmp	r0, #0
-	beq	.L211
+	beq	.L215
 	movs	r2, #8
-	ldr	r3, .L328+116
+	ldr	r3, .L339+112
 	str	r2, [r3]
 	movs	r3, #100
 	strh	r3, [r5, #26]
-.L211:
-	ldr	r3, .L328+120
-	ldr	r2, .L328+112
+.L215:
+	ldr	r3, .L339+116
+	ldr	r2, .L339+108
 	str	r0, [r3, #8]
 	str	r2, [r3, #12]
 	movs	r3, #0
-	ldr	r2, .L328+120
+	ldr	r2, .L339+116
 	str	r3, [r2, #16]
-.L212:
-	ldr	r4, .L328+120
+.L216:
+	ldr	r4, .L339+116
 	ldr	r3, [r4, #16]
 	ldr	r2, [r4, #8]
 	cmp	r3, r2
-	bcs	.L269
+	bcs	.L273
 	ldr	r3, [r4, #12]
 	ldrb	r3, [r3]
 	cmp	r3, #255
-	beq	.L214
+	beq	.L218
 	cmp	r3, #35
-	beq	.LCB1966
-	b	.L215	@long jump
-.LCB1966:
+	beq	.LCB2021
+	b	.L219	@long jump
+.LCB2021:
 	ldrb	r3, [r5, #16]
 	cmp	r3, #0
-	beq	.L216
+	beq	.L220
 	ldr	r3, [r5, #20]
 	movs	r2, #2
-	ldr	r1, .L328+124
+	ldr	r1, .L339+120
 	ldr	r0, [r3, #12]
 	bl	sam_ba_putdata.isra.0
-.L216:
+.L220:
 	movs	r3, r5
 	adds	r3, r3, #68
 	ldrb	r3, [r3]
 	cmp	r3, #83
-	beq	.LCB1982
-	b	.L217	@long jump
-.LCB1982:
+	beq	.LCB2037
+	b	.L221	@long jump
+.LCB2037:
 	ldr	r3, [r4, #8]
 	ldr	r6, [r4, #16]
 	cmp	r3, r6
-	bls	.L218
+	bls	.L222
 	ldr	r1, [r4, #12]
 	ldr	r2, [r4, #20]
 	adds	r1, r1, #1
@@ -1777,9 +1817,9 @@ main:
 	str	r6, [r4, #16]
 	subs	r3, r3, r6
 	cmp	r3, r2
-	bcs	.L219
+	bcs	.L223
 	str	r3, [r4, #24]
-.L220:
+.L224:
 	ldr	r3, [r4, #24]
 	ldr	r1, [r7, #8]
 	movs	r2, r3
@@ -1796,9 +1836,9 @@ main:
 	str	r3, [r4, #12]
 	ldrb	r3, [r7, #12]
 	strb	r3, [r4, #28]
-.L218:
-	ldr	r3, .L328+120
-	ldr	r2, .L328+120
+.L222:
+	ldr	r3, .L339+116
+	ldr	r2, .L339+116
 	ldr	r3, [r3, #16]
 	ldr	r1, [r2, #20]
 	subs	r3, r3, #1
@@ -1809,69 +1849,68 @@ main:
 	str	r3, [r2, #12]
 	ldrb	r3, [r2, #28]
 	cmp	r3, r1
-	bcs	.L222
+	bcs	.L226
 	subs	r1, r1, r3
 	ldr	r3, [r5, #20]
 	ldr	r0, [r5, #64]
 	ldr	r3, [r3, #24]
 	blx	r3
 	cmp	r0, #0
-	beq	.L222
+	beq	.L226
 	movs	r2, #8
-	ldr	r3, .L328+116
+	ldr	r3, .L339+112
 	str	r2, [r3]
 	movs	r3, #100
 	strh	r3, [r5, #26]
-.L222:
+.L226:
 	.syntax divided
 @ 347 "sam_ba_monitor.c" 1
 	nop
 @ 0 "" 2
 	.thumb
 	.syntax unified
-.L224:
+.L228:
 	movs	r3, r5
 	movs	r2, #122
 	adds	r3, r3, #68
 	strb	r2, [r3]
 	movs	r2, #0
-	ldr	r3, .L328+120
+	ldr	r3, .L339+116
 	str	r2, [r3, #20]
 	ldrb	r3, [r5, #16]
 	cmp	r3, r2
-	beq	.L214
+	beq	.L218
 	ldr	r3, [r5, #20]
 	adds	r2, r2, #1
-	ldr	r1, .L328+128
+	ldr	r1, .L339+124
 	ldr	r0, [r3, #12]
 	bl	sam_ba_putdata.isra.0
-.L214:
-	ldr	r3, .L328+120
+.L218:
+	ldr	r3, .L339+116
 	ldr	r2, [r3, #16]
 	adds	r2, r2, #1
 	str	r2, [r3, #16]
 	ldr	r2, [r3, #12]
 	adds	r2, r2, #1
 	str	r2, [r3, #12]
-	b	.L212
-.L199:
-	ldr	r3, .L328+132
+	b	.L216
+.L203:
+	ldr	r3, .L339+128
 	str	r0, [r1]
-.L200:
+.L204:
 	subs	r3, r3, #1
 	cmp	r3, #0
-	bne	.L200
+	bne	.L204
 	str	r3, [r1]
-	b	.L198
-.L219:
+	b	.L202
+.L223:
 	str	r2, [r4, #24]
-	b	.L220
-.L329:
+	b	.L224
+.L340:
 	.align	2
-.L328:
+.L339:
 	.word	125010229
 	.word	1090535424
-	.word	1073743872
 	.word	1548
 	.word	1073744896
 	.word	66817
@@ -1903,115 +1942,115 @@ main:
 	.word	.LC51
 	.word	.LC68
 	.word	125000
-.L217:
+.L221:
 	cmp	r3, #82
-	bne	.L225
+	bne	.L229
 	movs	r3, r5
 	adds	r3, r3, #61
 	ldrb	r3, [r3]
 	cmp	r3, #0
-	beq	.L226
-	ldr	r3, .L330
+	beq	.L230
+	ldr	r3, .L341
 	ldr	r2, [r5, #64]
 	cmp	r2, r3
-	bhi	.L226
-	ldr	r3, .L330+4
+	bhi	.L230
+	ldr	r3, .L341+4
 	str	r3, [r5, #64]
-.L226:
+.L230:
 	ldr	r3, [r5, #20]
 	ldr	r2, [r4, #20]
 	ldr	r1, [r5, #64]
 	ldr	r0, [r3, #20]
 	bl	sam_ba_putdata_xmd.isra.2
-	b	.L224
-.L225:
+	b	.L228
+.L229:
 	cmp	r3, #79
-	bne	.L227
+	bne	.L231
 	ldr	r3, [r4, #20]
 	ldr	r2, [r5, #64]
 	strb	r3, [r2]
-	b	.L224
-.L227:
+	b	.L228
+.L231:
 	cmp	r3, #72
-	bne	.L228
+	bne	.L232
 	ldr	r3, [r4, #20]
 	ldr	r2, [r5, #64]
 	strh	r3, [r2]
-	b	.L224
-.L228:
+	b	.L228
+.L232:
 	cmp	r3, #87
-	bne	.L229
+	bne	.L233
 	ldr	r3, [r5, #64]
 	ldr	r2, [r4, #20]
 	str	r2, [r3]
-	b	.L224
-.L229:
+	b	.L228
+.L233:
 	movs	r2, r5
 	adds	r2, r2, #61
 	ldrb	r2, [r2]
 	cmp	r3, #111
-	bne	.L230
+	bne	.L234
 	cmp	r2, #0
-	beq	.L231
+	beq	.L235
 	ldr	r3, [r5, #64]
-	ldr	r2, .L330+8
+	ldr	r2, .L341+8
 	subs	r3, r3, #4
 	cmp	r3, r2
-	bhi	.L231
+	bhi	.L235
 	adds	r4, r4, #20
 	str	r4, [r5, #64]
-.L231:
+.L235:
 	movs	r1, #1
 	ldr	r0, [r5, #64]
-.L322:
+.L333:
 	bl	sam_ba_putdata_term
-	b	.L224
-.L230:
+	b	.L228
+.L234:
 	cmp	r3, #104
-	bne	.L232
+	bne	.L236
 	ldr	r1, [r5, #64]
 	cmp	r2, #0
-	beq	.L233
-	ldr	r2, .L330+8
+	beq	.L237
+	ldr	r2, .L341+8
 	subs	r3, r1, #4
 	cmp	r3, r2
-	bhi	.L233
+	bhi	.L237
 	movs	r3, #0
-.L320:
+.L331:
 	movs	r0, r4
 	str	r3, [r4, #20]
 	adds	r0, r0, #20
 	movs	r1, #2
-	b	.L322
-.L233:
+	b	.L333
+.L237:
 	ldrh	r3, [r1]
-	b	.L320
-.L232:
+	b	.L331
+.L236:
 	cmp	r3, #119
-	bne	.L235
+	bne	.L239
 	ldr	r1, [r5, #64]
 	cmp	r2, #0
-	beq	.L236
-	ldr	r2, .L330+8
+	beq	.L240
+	ldr	r2, .L341+8
 	subs	r3, r1, #4
 	cmp	r3, r2
-	bhi	.L236
+	bhi	.L240
 	movs	r3, #0
-.L321:
+.L332:
 	movs	r0, r4
 	str	r3, [r4, #20]
 	adds	r0, r0, #20
 	movs	r1, #4
-	b	.L322
-.L236:
+	b	.L333
+.L240:
 	ldr	r3, [r1]
-	b	.L321
-.L235:
+	b	.L332
+.L239:
 	cmp	r2, #0
-	bne	.L238
+	bne	.L242
 	cmp	r3, #71
-	bne	.L238
-	ldr	r3, .L330+12
+	bne	.L242
+	ldr	r3, .L341+12
 	ldr	r3, [r3, #20]
 	.syntax divided
 @ 71 "/home/leigh/.arduino15/packages/arduino/tools/CMSIS/4.5.0/CMSIS/Include/cmsis_gcc.h" 1
@@ -2023,7 +2062,7 @@ main:
 @ 0 "" 2
 	.thumb
 	.syntax unified
-	ldr	r1, .L330+12
+	ldr	r1, .L341+12
 	str	r2, [r1, #32]
 	ldr	r2, [r3]
 	.syntax divided
@@ -2051,187 +2090,187 @@ main:
 @ 0 "" 2
 	.thumb
 	.syntax unified
-	ldr	r3, .L330+12
+	ldr	r3, .L341+12
 	adds	r3, r3, #5
 	ldrb	r3, [r3, #31]
 	cmp	r3, #0
-	bne	.LCB2292
-	b	.L224	@long jump
-.LCB2292:
+	bne	.LCB2346
+	b	.L228	@long jump
+.LCB2346:
 	ldr	r3, [r5, #20]
 	movs	r0, #6
 	ldr	r3, [r3]
 	blx	r3
-	b	.L224
-.L238:
+	b	.L228
+.L242:
 	cmp	r3, #84
-	bne	.L240
+	bne	.L244
 	movs	r2, #2
 	subs	r3, r3, #83
 	strb	r3, [r5, #16]
-	ldr	r1, .L330+16
+	ldr	r1, .L341+16
 	ldr	r3, [r5, #20]
-.L323:
+.L334:
 	ldr	r0, [r3, #12]
 	bl	sam_ba_putdata.isra.0
-	b	.L224
-.L240:
+	b	.L228
+.L244:
 	cmp	r3, #78
-	bne	.L241
+	bne	.L245
 	ldrb	r3, [r5, #16]
 	cmp	r3, #0
-	bne	.L242
+	bne	.L246
 	ldr	r3, [r5, #20]
 	movs	r2, #2
-	ldr	r1, .L330+16
+	ldr	r1, .L341+16
 	ldr	r0, [r3, #12]
 	bl	sam_ba_putdata.isra.0
-.L242:
+.L246:
 	movs	r3, #0
 	strb	r3, [r5, #16]
-	b	.L224
-.L241:
+	b	.L228
+.L245:
 	cmp	r3, #86
-	bne	.L243
+	bne	.L247
 	ldr	r3, [r5, #20]
 	movs	r2, #1
-	ldr	r1, .L330+20
+	ldr	r1, .L341+20
 	ldr	r0, [r3, #12]
 	bl	sam_ba_putdata.isra.0
 	ldr	r3, [r5, #20]
-	ldr	r1, .L330+24
+	ldr	r1, .L341+24
 	movs	r2, #3
 	adds	r1, r1, #84
 	ldr	r0, [r3, #12]
 	bl	sam_ba_putdata.isra.0
 	ldr	r3, [r5, #20]
 	movs	r2, #1
-	ldr	r1, .L330+28
+	ldr	r1, .L341+28
 	ldr	r0, [r3, #12]
 	bl	sam_ba_putdata.isra.0
 	ldr	r3, [r5, #20]
-	ldr	r1, .L330+24
+	ldr	r1, .L341+24
 	movs	r2, #14
 	adds	r1, r1, #88
 	ldr	r0, [r3, #12]
 	bl	sam_ba_putdata.isra.0
-	ldr	r1, .L330+32
+	ldr	r1, .L341+32
 	ldr	r3, [r5, #20]
 	str	r1, [r4, #12]
 	movs	r2, #23
-	b	.L323
-.L243:
+	b	.L334
+.L247:
 	cmp	r3, #88
-	bne	.L244
+	bne	.L248
 	cmp	r2, #0
-	bne	.L273
+	bne	.L277
 	ldr	r0, [r4, #20]
-.L245:
+.L249:
 	bl	eraseFlash
 	ldr	r3, [r5, #20]
 	movs	r2, #3
-	ldr	r1, .L330+36
-	b	.L323
-.L273:
+	ldr	r1, .L341+36
+	b	.L334
+.L277:
 	movs	r0, #128
 	lsls	r0, r0, #6
-	b	.L245
-.L244:
+	b	.L249
+.L248:
 	cmp	r3, #89
-	bne	.L246
+	bne	.L250
 	ldr	r3, [r4, #20]
 	ldr	r6, [r5, #64]
 	cmp	r3, #0
-	bne	.L247
+	bne	.L251
 	str	r6, [r4, #40]
-.L248:
+.L252:
 	ldr	r3, [r5, #20]
 	movs	r2, #3
-	ldr	r1, .L330+40
-	b	.L323
-.L247:
+	ldr	r1, .L341+40
+	b	.L334
+.L251:
 	cmp	r2, #0
-	beq	.L249
+	beq	.L253
 	movs	r0, #128
 	ldr	r3, [r5, #4]
 	lsls	r0, r0, #6
 	cmp	r3, r0
-	beq	.L249
+	beq	.L253
 	bl	eraseFlash
-.L249:
+.L253:
 	movs	r0, #128
-	ldr	r3, .L330+12
+	ldr	r3, .L341+12
 	ldr	r3, [r3, #20]
 	str	r3, [r7, #12]
 	lsrs	r2, r3, #2
-	ldr	r3, .L330+12
+	ldr	r3, .L341+12
 	ldr	r3, [r3, #40]
 	mov	ip, r3
-	ldr	r3, .L330+44
+	ldr	r3, .L341+44
 	ldr	r1, [r3, #4]
 	bics	r1, r0
 	str	r1, [r3, #4]
 	ldr	r1, [r5, #12]
 	lsrs	r1, r1, #2
 	str	r1, [r7, #8]
-.L250:
+.L254:
 	cmp	r2, #0
-	beq	.L248
-	ldr	r1, .L330+48
+	beq	.L252
+	ldr	r1, .L341+48
 	strh	r1, [r3]
-.L251:
+.L255:
 	ldrb	r1, [r3, #20]
 	lsls	r1, r1, #31
-	bpl	.L251
+	bpl	.L255
 	mov	r1, ip
 	movs	r4, r6
 	str	r1, [r7, #12]
 	movs	r1, #0
-.L252:
+.L256:
 	ldr	r0, [r7, #12]
 	movs	r6, r4
 	mov	ip, r0
 	ldr	r0, [r7, #8]
 	cmp	r1, r0
-	beq	.L253
+	beq	.L257
 	cmp	r1, r2
-	bne	.L254
-.L253:
-	ldr	r0, .L330+52
+	bne	.L258
+.L257:
+	ldr	r0, .L341+52
 	strh	r0, [r3]
-.L255:
+.L259:
 	ldrb	r0, [r3, #20]
 	lsls	r0, r0, #31
-	bpl	.L255
+	bpl	.L259
 	subs	r2, r2, r1
-	b	.L250
-.L254:
+	b	.L254
+.L258:
 	ldr	r0, [r7, #12]
 	adds	r1, r1, #1
 	ldmia	r0!, {r6}
 	str	r0, [r7, #12]
 	stmia	r4!, {r6}
-	b	.L252
-.L246:
+	b	.L256
+.L250:
 	cmp	r3, #90
-	beq	.LCB2488
-	b	.L224	@long jump
-.LCB2488:
+	beq	.LCB2542
+	b	.L228	@long jump
+.LCB2542:
 	ldr	r1, [r4, #20]
 	movs	r4, #0
 	ldr	r3, [r5, #64]
-	ldr	r0, .L330+56
+	ldr	r0, .L341+56
 	adds	r1, r3, r1
-.L258:
+.L262:
 	cmp	r1, r3
-	bne	.L259
+	bne	.L263
 	ldr	r3, [r5, #20]
 	movs	r2, #1
 	ldr	r0, [r3, #12]
-	ldr	r1, .L330+60
+	ldr	r1, .L341+60
 	bl	sam_ba_putdata.isra.0
 	movs	r3, #7
-.L262:
+.L266:
 	movs	r2, #15
 	ands	r2, r4
 	uxtb	r0, r2
@@ -2239,14 +2278,14 @@ main:
 	lsrs	r4, r4, #4
 	adds	r1, r1, #48
 	cmp	r2, #9
-	ble	.L261
+	ble	.L265
 	adds	r1, r1, #7
-.L261:
+.L265:
 	movs	r2, #16
 	adds	r2, r7, r2
 	strb	r1, [r2, r3]
 	subs	r3, r3, #1
-	bcs	.L262
+	bcs	.L266
 	movs	r1, #16
 	ldr	r3, [r5, #20]
 	movs	r2, #8
@@ -2255,9 +2294,9 @@ main:
 	bl	sam_ba_putdata.isra.0
 	ldr	r3, [r5, #20]
 	movs	r2, #3
-	ldr	r1, .L330+64
-	b	.L323
-.L259:
+	ldr	r1, .L341+64
+	b	.L334
+.L263:
 	ldrb	r6, [r3]
 	lsrs	r2, r4, #8
 	eors	r2, r6
@@ -2267,54 +2306,54 @@ main:
 	eors	r4, r2
 	uxth	r4, r4
 	adds	r3, r3, #1
-	b	.L258
-.L215:
+	b	.L262
+.L219:
 	movs	r2, r3
 	subs	r2, r2, #48
 	uxtb	r1, r2
 	cmp	r1, #9
-	bhi	.L264
+	bhi	.L268
 	ldr	r3, [r4, #20]
 	lsls	r3, r3, #4
-.L324:
+.L335:
 	orrs	r3, r2
 	str	r3, [r4, #20]
-	b	.L214
-.L264:
+	b	.L218
+.L268:
 	movs	r2, r3
 	subs	r2, r2, #65
 	cmp	r2, #5
-	bhi	.L265
+	bhi	.L269
 	ldr	r2, [r4, #20]
 	subs	r3, r3, #55
 	lsls	r2, r2, #4
-	b	.L324
-.L265:
+	b	.L335
+.L269:
 	movs	r2, r3
 	subs	r2, r2, #97
 	cmp	r2, #5
-	bhi	.L266
+	bhi	.L270
 	ldr	r2, [r4, #20]
 	subs	r3, r3, #87
 	lsls	r2, r2, #4
-	b	.L324
-.L266:
+	b	.L335
+.L270:
 	movs	r2, #0
 	cmp	r3, #44
-	bne	.L267
+	bne	.L271
 	ldr	r3, [r4, #20]
 	str	r3, [r5, #64]
-.L325:
+.L336:
 	str	r2, [r4, #20]
-	b	.L214
-.L267:
+	b	.L218
+.L271:
 	movs	r1, r5
 	adds	r1, r1, #68
 	strb	r3, [r1]
-	b	.L325
-.L331:
+	b	.L336
+.L342:
 	.align	2
-.L330:
+.L341:
 	.word	536870911
 	.word	536891392
 	.word	536870907
@@ -2345,41 +2384,41 @@ Reset_Handler:
 	@ Volatile: function does not return.
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 0, uses_anonymous_args = 0
-	ldr	r2, .L344
-	ldr	r0, .L344+4
+	ldr	r2, .L355
+	ldr	r0, .L355+4
 	push	{r4, r5, r6, lr}
 	cmp	r2, r0
-	bne	.L333
-.L337:
-	ldr	r2, .L344+8
-	ldr	r3, .L344+12
+	bne	.L344
+.L348:
+	ldr	r2, .L355+8
+	ldr	r3, .L355+12
 	movs	r1, #0
 	cmp	r3, r2
-	bne	.L334
-.L335:
+	bne	.L345
+.L346:
 	bl	main
-.L333:
-	ldr	r4, .L344+16
+.L344:
+	ldr	r4, .L355+16
 	movs	r3, #0
 	cmp	r4, r2
-	beq	.L337
-.L336:
+	beq	.L348
+.L347:
 	adds	r1, r2, r3
 	cmp	r0, r1
-	bls	.L337
+	bls	.L348
 	ldr	r5, [r4, r3]
 	adds	r3, r3, #4
 	str	r5, [r1]
-	b	.L336
-.L339:
+	b	.L347
+.L350:
 	stmia	r3!, {r1}
-.L334:
-	cmp	r3, r2
-	bcc	.L339
-	b	.L335
 .L345:
+	cmp	r3, r2
+	bcc	.L350
+	b	.L346
+.L356:
 	.align	2
-.L344:
+.L355:
 	.word	__data_start__
 	.word	__data_end__
 	.word	__bss_end__
@@ -2983,7 +3022,7 @@ exception_table:
 .LC55:
 	.ascii	" \000"
 .LC57:
-	.ascii	" Sep  9 2021 12:54:15\012\015\000"
+	.ascii	" Jan 10 2022 16:15:33\012\015\000"
 .LC59:
 	.ascii	"X\012\015\000"
 .LC61:
